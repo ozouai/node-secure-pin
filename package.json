@@ -1,0 +1,25 @@
+{
+  "name": "secure-pin",
+  "version": "1.0.0",
+  "description": "A cryptographically secure pin code generator",
+  "main": "index.js",
+  "typings": "index.ts",
+  "scripts": {
+    "test": "test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ozouai/node-secure-pin.git"
+  },
+  "keywords": [
+    "pin",
+    "generator",
+    "secure"
+  ],
+  "author": "omar@omarzouai.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ozouai/node-secure-pin/issues"
+  },
+  "homepage": "https://github.com/ozouai/node-secure-pin#readme"
+}
