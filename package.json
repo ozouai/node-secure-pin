@@ -1,7 +1,7 @@
 {
   "name": "secure-pin",
-  "version": "1.0.5",
-  "description": "A cryptographically secure pin code generator",
+  "version": "1.0.6",
+  "description": "A cryptographically secure pin code generator with string support",
   "main": "index.js",
   "typings": "index.ts",
   "scripts": {
@@ -14,7 +14,14 @@
   "keywords": [
     "pin",
     "generator",
-    "secure"
+    "secure",
+    "typescript",
+    "string",
+    "random",
+    "crypto",
+    "utility",
+    "char",
+    "character"
   ],
   "author": "omar@omarzouai.com",
   "license": "ISC",

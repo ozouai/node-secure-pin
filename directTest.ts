@@ -9,6 +9,18 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
+var charSet = new PINGenerator.CharSet();
+
+charSet.addLowerCaseAlpha().addUpperCaseAlpha().addNumeric().addSpecialCharacters().randomize().removeChar("");
+console.log(charSet.toString());
+PINGenerator.generateString(25, charSet, function(str) {
+    console.log(str);
+    process.exit();
+})
+console.log(PINGenerator.generateStringSync(20, charSet));
+
+
+
 /*var i = 0;
 var created = {};
 var collisionCount = 0;
@@ -23,7 +35,7 @@ while(true) {
     if(collide) process.stdout.write("\n");
 
 }*/
-
+/*
 var generated = {};
 for(var i=0; i<500000; i++) {
     var pin = PINGenerator.generatePinSync(8);
@@ -58,4 +70,4 @@ for(var o of out) {
 
 
 fs.writeFileSync("temp/out.csv", outF);
-process.exit();
+process.exit();*/

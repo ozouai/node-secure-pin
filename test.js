@@ -6,7 +6,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var chai = require("chai");
 var sp = require("./index");
-describe("Secure PIN", function () {
+var index_1 = require("./index");
+describe("PIN Generator", function () {
     describe("Generate Async, 6 digits", function () {
         it("Should have a length of 6", function (done) {
             sp.generatePin(6, function (pin) {
@@ -57,6 +58,106 @@ describe("Secure PIN", function () {
             var pin = sp.generatePinSync(16);
             var np = pin.replace(/[^0-9]/g, "");
             chai.assert(pin === np, "PIN doesn't contain all numbers");
+        });
+    });
+});
+describe("String Generator", function () {
+    describe("Generate lowercase, 10 characters, async", function () {
+        it("Should have a length of 10", function (done) {
+            sp.generateString(10, (new index_1.CharSet()).addLowerCaseAlpha(), function (str) {
+                chai.assert(str.length === 10, "Invalid Length");
+                done();
+            });
+        });
+        it("Should contain only lower case letters", function (done) {
+            sp.generateString(10, (new index_1.CharSet()).addLowerCaseAlpha(), function (str) {
+                var nstr = str.replace(/[^a-z]/g, "");
+                chai.assert(nstr === str, "String doesn't have just lower case letters");
+                done();
+            });
+        });
+    });
+    describe("Generate uppercase, 10 characters, async", function () {
+        it("Should have a length of 10", function (done) {
+            sp.generateString(10, (new index_1.CharSet()).addUpperCaseAlpha(), function (str) {
+                chai.assert(str.length === 10, "Invalid Length");
+                done();
+            });
+        });
+        it("Should contain only lower case letters", function (done) {
+            sp.generateString(10, (new index_1.CharSet()).addUpperCaseAlpha(), function (str) {
+                var nstr = str.replace(/[^A-Z]/g, "");
+                chai.assert(nstr === str, "String doesn't have just upper case letters");
+                done();
+            });
+        });
+    });
+    describe("Generate mixedCase, 10 characters, async", function () {
+        it("Should have a length of 10", function (done) {
+            sp.generateString(10, (new index_1.CharSet()).addUpperCaseAlpha().addLowerCaseAlpha(), function (str) {
+                chai.assert(str.length === 10, "Invalid Length");
+                done();
+            });
+        });
+        it("Should contain only lower case letters", function (done) {
+            sp.generateString(10, (new index_1.CharSet()).addUpperCaseAlpha().addLowerCaseAlpha(), function (str) {
+                var nstr = str.replace(/[^a-z|A-Z]/g, "");
+                chai.assert(nstr === str, "String doesn't have just upper case letters");
+                done();
+            });
+        });
+    });
+    describe("Generate numeric, 10 characters, async", function () {
+        it("Should have a length of 10", function (done) {
+            sp.generateString(10, (new index_1.CharSet()).addNumeric(), function (str) {
+                chai.assert(str.length === 10, "Invalid Length");
+                done();
+            });
+        });
+        it("Should contain only lower case letters", function (done) {
+            sp.generateString(10, (new index_1.CharSet()).addNumeric(), function (str) {
+                var nstr = str.replace(/[^0-9]/g, "");
+                chai.assert(nstr === str, "String doesn't have just numeric characters");
+                done();
+            });
+        });
+    });
+});
+describe("String Charset", function () {
+    describe("Test Randomization", function () {
+        var cs = new sp.CharSet();
+        cs.addNumeric().addLowerCaseAlpha().addUpperCaseAlpha();
+        var c = [].concat(cs.getCharSet().slice(0));
+        cs.randomize();
+        it("Should be the same length", function () {
+            chai.assert(c.length == cs.getCharSet().length, "Different Length");
+        });
+        it("Shouldn't be the same contents", function () {
+            chai.expect(cs.getCharSet()).to.not.eql(c);
+        });
+    });
+    describe("Test Character Delete", function () {
+        it("Should delete a single character", function () {
+            var cs = new sp.CharSet();
+            cs.addNumeric().addLowerCaseAlpha().addUpperCaseAlpha().addSpecialCharacters();
+            cs.removeChar("a");
+            chai.expect(cs.getCharSet()).to.not.contain("a", "a wasn't deleted");
+        });
+        it("Should delete a string of characters", function () {
+            var cs = new sp.CharSet();
+            cs.addNumeric().addLowerCaseAlpha().addUpperCaseAlpha().addSpecialCharacters();
+            cs.removeChar("abc");
+            chai.expect(cs.getCharSet()).to.not.contain("a", "a wasn't deleted");
+            chai.expect(cs.getCharSet()).to.not.contain("b", "b wasn't deleted");
+            chai.expect(cs.getCharSet()).to.not.contain("c", "c wasn't deleted");
+        });
+        it("Should delete an array of characters", function () {
+            var cs = new sp.CharSet();
+            cs.addNumeric().addLowerCaseAlpha().addUpperCaseAlpha().addSpecialCharacters();
+            cs.removeChar(["a", "b", "c"]);
+            chai.expect(cs.getCharSet()).to.not.contain("a", "a wasn't deleted");
+            chai.expect(cs.getCharSet()).to.not.contain("b", "b wasn't deleted");
+            chai.expect(cs.getCharSet()).to.not.contain("c", "c wasn't deleted");
         });
     });
 });
