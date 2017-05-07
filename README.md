@@ -1,6 +1,6 @@
 A simple and cryptographically secure way to generate PIN codes. Has no dependencies and includes Typescript definitions.
 
-[![Build Status](https://travis-ci.org/ozouai/node-secure-pin.svg?branch=master&style=flat-square)](https://travis-ci.org/ozouai/node-secure-pin) [![npm](https://img.shields.io/npm/l/secure-pin.svg?style=flat)]() [![Beerpay](https://beerpay.io/ozouai/node-secure-pin/make-wish.svg)](https://beerpay.io/ozouai/node-secure-pin) [![Beerpay](https://beerpay.io/ozouai/node-secure-pin/badge.svg?style=flat)](https://beerpay.io/ozouai/node-secure-pin)
+[![GitHub stars](https://img.shields.io/github/stars/ozouai/node-secure-pin.svg)](https://github.com/ozouai/node-secure-pin/stargazers) [![Build Status](https://travis-ci.org/ozouai/node-secure-pin.svg?branch=master&style=flat-square)](https://travis-ci.org/ozouai/node-secure-pin) [![npm](https://img.shields.io/npm/l/secure-pin.svg?style=flat)]() [![Beerpay](https://beerpay.io/ozouai/node-secure-pin/make-wish.svg)](https://beerpay.io/ozouai/node-secure-pin) [![Beerpay](https://beerpay.io/ozouai/node-secure-pin/badge.svg?style=flat)](https://beerpay.io/ozouai/node-secure-pin)
 
 ## Installation
 

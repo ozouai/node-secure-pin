@@ -3,7 +3,7 @@
 .idea/
 
 .git/
-
+temp/
 ### Node template
 # Logs
 logs
