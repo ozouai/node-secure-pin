@@ -5,32 +5,40 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var PINGenerator = require("./index");
 var readline = require("readline");
-var rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
 var charSet = new PINGenerator.CharSet();
-charSet.addLowerCaseAlpha().addUpperCaseAlpha().addNumeric().addSpecialCharacters().randomize().removeChar("");
+charSet.addLowerCaseAlpha().addUpperCaseAlpha().addNumeric().randomize().removeChar("");
 console.log(charSet.toString());
-PINGenerator.generateString(25, charSet, function (str) {
-    console.log(str);
-    process.exit();
-});
-console.log(PINGenerator.generateStringSync(20, charSet));
-/*var i = 0;
+console.log(PINGenerator.generateStringSync(10, charSet));
+function padToLength(str, header) {
+    var s = str;
+    while (s.length < header.length) {
+        s += " ";
+    }
+    return s;
+}
+var i = 0;
 var created = {};
 var collisionCount = 0;
-while(true) {
+var header = process.stdout.write("Collision | Generation | Collided String | Collision Chance\n");
+process.stdout.write("----------|------------|-----------------|----------------- \n");
+while (true) {
     i++;
-    let collide = false;
-    var pin = PINGenerator.generatePinSync(4);
-    if(created[pin]) { collisionCount++; collide = true; }
-    else created[pin] = true;
+    var collide = false;
+    //var pin = PINGenerator.generatePinSync(4);
+    var pin = PINGenerator.generateStringSync(10, charSet);
+    if (created[pin]) {
+        collisionCount++;
+        collide = true;
+    }
+    else
+        created[pin] = true;
     readline.cursorTo(process.stdout, 0);
-    process.stdout.write(""+i + " Collisions: " + collisionCount);
-    if(collide) process.stdout.write("\n");
-
-}*/
+    process.stdout.write("" + i + " Collisions: " + collisionCount);
+    if (collide) {
+        readline.cursorTo(process.stdout, 0);
+        process.stdout.write(padToLength("" + collisionCount, "Collision") + " | " + padToLength("" + i, "Generation") + " | " + padToLength(pin, "Collided String") + " | " + ("" + (collisionCount / i)) + "\n");
+    }
+}
 /*
 var generated = {};
 for(var i=0; i<500000; i++) {

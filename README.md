@@ -51,7 +51,7 @@ Pin: 1234
 In order to generate a string, first you must create a character set. This can either be an array of characters, or the built-in CharSet class
 
 ```typescript
-	var charSet = new SecurePIN.CharSet();
+var charSet = new SecurePIN.CharSet();
 ```
 
 Then, you need to add characters to the set. The class has a couple functions to add basic characters, as well as some extra functions.
@@ -67,26 +67,76 @@ Then, you need to add characters to the set. The class has a couple functions to
 ### Example
 
 ```typescript
-	var charSet = new SecurePIN.CharSet();
-	charSet.addLowerCaseAlpha().addUpperCaseAlpha().removeChar("aA").randomize();
+var charSet = new SecurePIN.CharSet();
+charSet.addLowerCaseAlpha().addUpperCaseAlpha().removeChar("aA").randomize();
 ```
 
 Once you have your CharSet created, pass it along to the string generator and generate a string!
 
 ```typescript
-	var charSet = ...
-	...
-	SecurePIN.generateString(15, charSet, function(str) {
-		console.log(str);
-	});
+var charSet = ...
+...
+SecurePIN.generateString(15, charSet, function(str) {
+	console.log(str);
+});
 ```
 
-## Entropy
+## PIN Entropy
 
 Secure-Pin uses a cryptographically secure method of generating pins, ensuring a high amount of entropy 
 
 ![Entropy Graph](https://plot.ly/~zzarzzur/2.png)
 
-Above is a graph of 100,000 randomly generated PINs, with an even distribution across the graph.
+Above is a graph of 100,000 randomly generated 4 Digit PINs, with an even distribution across the graph.
 
 <small>The X-Axis represents the PIN number/1000.0f, the Y-Axis represents the amount of times the PIN was generated during the 100,000 cycle.</small>
+
+## String Entropy
+
+String generation uses the same cryptographically secure routines as the PIN generation. The result is a secure string generator with a very low collision rate.
+
+Below is a sample of a 5 character alphanumeric string, with both upper and lowercase letters.
+
+```
+Collision | Generation | Collided String
+----------|------------|----------------
+1         | 36368      | V81w4
+2         | 64478      | TfYqX
+3         | 66830      | kNtBL
+4         | 81599      | c5MQH
+5         | 86058      | neddv
+6         | 88481      | MqHq6
+7         | 92785      | wVMep
+8         | 94769      | y0uNQ
+9         | 94896      | bUERh
+10        | 94941      | vKBY7
+...
+290       | 671944     | JpYhU
+291       | 672343     | aLL0D
+292       | 674242     | TNnj4
+293       | 674632     | Tv9Xp
+294       | 674796     | 7dFX6
+295       | 675841     | R3weS
+296       | 677368     | mwftq
+297       | 677385     | O3Lmf
+298       | 677507     | 2bOwb
+299       | 677818     | 4xQEL
+300       | 678343     | KhNZW
+```
+
+At the start of the generation, the first collision only occurs after 36,368 strings are generated. As we move later on in the generation we see that the collisions happen more frequently. This is to be expected, as we're only using a 5 character string.
+
+### 10 Character string
+
+Let's increase the string size to 10 characters and see what happens.
+
+```
+Collision | Generation | Collided String | Collision Chance
+----------|------------|-----------------|-----------------
+2796203 Collisions: 0
+<--- Last few GCs --->
+
+[25568:0000014404C51BE0]   355188 ms: Mark-sweep 1063.7 (1200.0) -> 1063.6 (1200.0) MB, 2444.7 / 0.0 ms  allocation failure GC in old space requested
+```
+
+Oh, we ran out of memory. Apparently we managed to generate 2,796,203 strings without a single collision!

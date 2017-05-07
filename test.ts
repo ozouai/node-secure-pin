@@ -85,7 +85,7 @@ describe("String Generator", function() {
                 done();
             })
         });
-        it("Should contain only lower case letters", function(done) {
+        it("Should contain only Upper Case letters", function(done) {
             sp.generateString(10, (new CharSet()).addUpperCaseAlpha(), function(str) {
                 var nstr = str.replace(/[^A-Z]/g, "");
                 chai.assert(nstr === str, "String doesn't have just upper case letters");
@@ -100,7 +100,7 @@ describe("String Generator", function() {
                 done();
             })
         });
-        it("Should contain only lower case letters", function(done) {
+        it("Should contain only lower and Upper case letters", function(done) {
             sp.generateString(10, (new CharSet()).addUpperCaseAlpha().addLowerCaseAlpha(), function(str) {
                 var nstr = str.replace(/[^a-z|A-Z]/g, "");
                 chai.assert(nstr === str, "String doesn't have just upper case letters");
@@ -115,7 +115,7 @@ describe("String Generator", function() {
                 done();
             })
         });
-        it("Should contain only lower case letters", function(done) {
+        it("Should contain only numbers", function(done) {
             sp.generateString(10, (new CharSet()).addNumeric(), function(str) {
                 var nstr = str.replace(/[^0-9]/g, "");
                 chai.assert(nstr === str, "String doesn't have just numeric characters");
