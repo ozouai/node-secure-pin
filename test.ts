@@ -62,8 +62,8 @@ describe("PIN Generator", function() {
     })
 });
 
-describe("String Generator", function() {
-    describe("Generate lowercase, 10 characters, async", function() {
+describe("String Generator Async", function() {
+    describe("Generate lowercase, 10 characters", function() {
         it("Should have a length of 10", function(done) {
             sp.generateString(10, (new CharSet()).addLowerCaseAlpha(), function(str) {
                 chai.assert(str.length === 10, "Invalid Length");
@@ -78,7 +78,7 @@ describe("String Generator", function() {
             });
         })
     });
-    describe("Generate uppercase, 10 characters, async", function() {
+    describe("Generate uppercase, 10 characters", function() {
         it("Should have a length of 10", function(done) {
             sp.generateString(10, (new CharSet()).addUpperCaseAlpha(), function(str) {
                 chai.assert(str.length === 10, "Invalid Length");
@@ -93,7 +93,7 @@ describe("String Generator", function() {
             });
         })
     })
-    describe("Generate mixedCase, 10 characters, async", function() {
+    describe("Generate mixedCase, 10 characters", function() {
         it("Should have a length of 10", function(done) {
             sp.generateString(10, (new CharSet()).addUpperCaseAlpha().addLowerCaseAlpha(), function(str) {
                 chai.assert(str.length === 10, "Invalid Length");
@@ -108,7 +108,7 @@ describe("String Generator", function() {
             });
         })
     });
-    describe("Generate numeric, 10 characters, async", function() {
+    describe("Generate numeric, 10 characters", function() {
         it("Should have a length of 10", function(done) {
             sp.generateString(10, (new CharSet()).addNumeric(), function(str) {
                 chai.assert(str.length === 10, "Invalid Length");
@@ -121,6 +121,53 @@ describe("String Generator", function() {
                 chai.assert(nstr === str, "String doesn't have just numeric characters");
                 done();
             });
+        })
+    })
+});
+
+describe("String Generator Sync", function() {
+    describe("Generate lowercase, 10 characters", function() {
+        it("Should have a length of 10", function() {
+            var str = sp.generateStringSync(10, (new CharSet()).addLowerCaseAlpha());
+                chai.assert(str.length === 10, "Invalid Length");
+            })
+        it("Should contain only lower case letters", function() {
+            var str = sp.generateStringSync(10, (new CharSet()).addLowerCaseAlpha());
+            var nstr = str.replace(/[^a-z]/g, "");
+            chai.assert(nstr === str, "String doesn't have just lower case letters");
+        })
+    });
+    describe("Generate uppercase, 10 characters", function() {
+        it("Should have a length of 10", function() {
+            var str = sp.generateStringSync(10, (new CharSet()).addUpperCaseAlpha());
+            chai.assert(str.length === 10, "Invalid Length");
+        });
+        it("Should contain only Upper Case letters", function() {
+            var str = sp.generateStringSync(10, (new CharSet()).addUpperCaseAlpha());
+            var nstr = str.replace(/[^A-Z]/g, "");
+            chai.assert(nstr === str, "String doesn't have just upper case letters");
+        })
+    })
+    describe("Generate mixedCase, 10 characters", function() {
+        it("Should have a length of 10", function() {
+            var str = sp.generateStringSync(10, (new CharSet()).addUpperCaseAlpha().addLowerCaseAlpha());
+            chai.assert(str.length === 10, "Invalid Length");
+        });
+        it("Should contain only lower and Upper case letters", function() {
+            var str = sp.generateStringSync(10, (new CharSet()).addUpperCaseAlpha().addLowerCaseAlpha());
+            var nstr = str.replace(/[^a-z|A-Z]/g, "");
+            chai.assert(nstr === str, "String doesn't have just upper case letters");
+        })
+    });
+    describe("Generate numeric, 10 characters", function() {
+        it("Should have a length of 10", function() {
+            var str = sp.generateStringSync(10, (new CharSet()).addNumeric());
+            chai.assert(str.length === 10, "Invalid Length");
+        });
+        it("Should contain only numbers", function() {
+            var str = sp.generateStringSync(10, (new CharSet()).addNumeric());
+            var nstr = str.replace(/[^0-9]/g, "");
+            chai.assert(nstr === str, "String doesn't have just numeric characters");
         })
     })
 });

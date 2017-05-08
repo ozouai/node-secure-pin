@@ -1,6 +1,6 @@
 A simple and cryptographically secure way to generate PIN codes and Strings. Has no dependencies and includes Typescript definitions.
 
-[![GitHub stars](https://img.shields.io/github/stars/ozouai/node-secure-pin.svg)](https://github.com/ozouai/node-secure-pin/stargazers) [![Build Status](https://travis-ci.org/ozouai/node-secure-pin.svg?branch=master&style=flat-square)](https://travis-ci.org/ozouai/node-secure-pin) [![npm](https://img.shields.io/npm/l/secure-pin.svg?style=flat)]() [![Beerpay](https://beerpay.io/ozouai/node-secure-pin/make-wish.svg)](https://beerpay.io/ozouai/node-secure-pin) [![Beerpay](https://beerpay.io/ozouai/node-secure-pin/badge.svg?style=flat)](https://beerpay.io/ozouai/node-secure-pin)
+[![GitHub stars](https://img.shields.io/github/stars/ozouai/node-secure-pin.svg)](https://github.com/ozouai/node-secure-pin/stargazers) [![Build Status](https://travis-ci.org/ozouai/node-secure-pin.svg?branch=master&style=flat-square)](https://travis-ci.org/ozouai/node-secure-pin) [![npm](https://img.shields.io/npm/l/secure-pin.svg?style=flat)]() [![Beerpay](https://beerpay.io/ozouai/node-secure-pin/make-wish.svg)](https://beerpay.io/ozouai/node-secure-pin) [![Beerpay](https://beerpay.io/ozouai/node-secure-pin/badge.svg?style=flat)](https://beerpay.io/ozouai/node-secure-pin) [![Homepage](https://img.shields.io/badge/View-Homepage-blue.svg)](https://omarzouai.com/node/7)
 
 ## Installation
 
@@ -46,6 +46,14 @@ Returns
 Pin: 1234
 ```
 
+### Synchronously
+
+You can also generate a pin synchronously with `generatePinSync`
+
+```javascript
+var pin = SecurePIN.generatePinSync(4);
+```
+
 ## Generate String
 
 In order to generate a string, first you must create a character set. This can either be an array of characters, or the built-in CharSet class
@@ -73,12 +81,22 @@ charSet.addLowerCaseAlpha().addUpperCaseAlpha().removeChar("aA").randomize();
 
 Once you have your CharSet created, pass it along to the string generator and generate a string!
 
+
 ```typescript
 var charSet = ...
 ...
 SecurePIN.generateString(15, charSet, function(str) {
 	console.log(str);
 });
+```
+
+### Synchronous Example
+
+```typescript
+var charSet = ...
+...
+var str = SecurePIN.generateStringSync(15, charSet);
+console.log(str);
 ```
 
 ## PIN Entropy

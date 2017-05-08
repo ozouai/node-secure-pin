@@ -1,43 +1,44 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by Omar on 5/3/2017.
  */
-var PINGenerator = require("./index");
-var readline = require("readline");
+import * as PINGenerator from "../index";
+import * as readline from "readline";
+import * as fs from "fs";
+
 var charSet = new PINGenerator.CharSet();
+
 charSet.addLowerCaseAlpha().addUpperCaseAlpha().addNumeric().randomize().removeChar("");
 console.log(charSet.toString());
 console.log(PINGenerator.generateStringSync(10, charSet));
-function padToLength(str, header) {
+
+function padToLength(str: string, header: string) {
     var s = str;
-    while (s.length < header.length) {
-        s += " ";
+    while(s.length < header.length) {
+        s+=" ";
     }
     return s;
 }
+
 var i = 0;
 var created = {};
 var collisionCount = 0;
-var header = process.stdout.write("Collision | Generation | Collided String | Collision Chance\n");
+var header =
+process.stdout.write("Collision | Generation | Collided String | Collision Chance\n");
 process.stdout.write("----------|------------|-----------------|----------------- \n");
-while (true) {
+while(true) {
     i++;
-    var collide = false;
+    let collide = false;
     //var pin = PINGenerator.generatePinSync(4);
-    var pin = PINGenerator.generateStringSync(10, charSet);
-    if (created[pin]) {
-        collisionCount++;
-        collide = true;
-    }
-    else
-        created[pin] = true;
+    var pin = PINGenerator.generateStringSync(5, charSet);
+    if(created[pin]) { collisionCount++; collide = true; }
+    else created[pin] = true;
     readline.cursorTo(process.stdout, 0);
-    process.stdout.write("" + i + " Collisions: " + collisionCount);
-    if (collide) {
+    process.stdout.write(""+i + " Collisions: " + collisionCount);
+    if(collide) {
         readline.cursorTo(process.stdout, 0);
-        process.stdout.write(padToLength("" + collisionCount, "Collision") + " | " + padToLength("" + i, "Generation") + " | " + padToLength(pin, "Collided String") + " | " + ("" + (collisionCount / i)) + "\n");
+        process.stdout.write(`${padToLength(""+collisionCount, "Collision")} | ${padToLength(""+i, "Generation")} | ${padToLength(pin, "Collided String")} | ${""+(collisionCount/i)}\n`);
     }
+
 }
 /*
 var generated = {};
@@ -74,4 +75,4 @@ for(var o of out) {
 
 
 fs.writeFileSync("temp/out.csv", outF);
-process.exit();*/ 
+process.exit();*/

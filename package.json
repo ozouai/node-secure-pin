@@ -1,9 +1,10 @@
 {
   "name": "secure-pin",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A cryptographically secure pin code generator with string support",
   "main": "index.js",
   "typings": "index.ts",
+  "homepage": "https://omarzouai.com/node/7",
   "scripts": {
     "test": "mocha test.js"
   },
@@ -23,7 +24,7 @@
     "char",
     "character"
   ],
-  "author": "omar@omarzouai.com",
+  "author": "Omar Zouai <omar@omarzouai.com> (https://omarzouai.com/)",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ozouai/node-secure-pin/issues"
