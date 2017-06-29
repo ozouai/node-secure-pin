@@ -172,6 +172,16 @@ describe("String Generator Sync", function() {
     })
 });
 
+describe("Number Generator", function() {
+    describe("Sync", function() {
+        it("Should be within a range of 0-100", function() {
+            var i = sp.generateRandomIntSync(0, 100);
+            chai.assert(i >= 0, "Less than 0");
+            chai.assert(i <= 100, "Greater than 100");
+        })
+    })
+})
+
 describe("String Charset", function() {
     describe("Test Randomization", function() {
         var cs = new sp.CharSet();
