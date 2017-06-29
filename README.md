@@ -12,7 +12,7 @@ npm install secure-pin
 
 Typescript
 
-```typescript
+```javascript
 import * as SecurePIN from "secure-pin";
 ```
 
@@ -26,7 +26,7 @@ var SecurePIN = require("secure-pin");
 
 ### Signature
 
-```typescript
+```javascript
 SecurePIN.generatePin(length : number, callback: (pin: string) => void);
 ```
 
@@ -34,7 +34,7 @@ SecurePIN.generatePin(length : number, callback: (pin: string) => void);
 
 ### Example
 
-```typescript
+```javascript
 SecurePIN.generatePin(4, (pin)=> {
     console.log("Pin: " + pin);
 })
@@ -54,11 +54,31 @@ You can also generate a pin synchronously with `generatePinSync`
 var pin = SecurePIN.generatePinSync(4);
 ```
 
+## Generate Numbers
+
+Methods also exist to securely generate numbers within a given range
+
+
+### Async
+
+```javascript
+SecurePIN.generateInt(0, 100, function(int) {
+    console.log(int);
+});
+```
+
+### Synchronously
+
+```javascript
+var int = SecurePIN.generateIntSync(0, 100);
+console.log(int);
+```
+
 ## Generate String
 
 In order to generate a string, first you must create a character set. This can either be an array of characters, or the built-in CharSet class
 
-```typescript
+```javascript
 var charSet = new SecurePIN.CharSet();
 ```
 
@@ -74,7 +94,7 @@ Then, you need to add characters to the set. The class has a couple functions to
 
 ### Example
 
-```typescript
+```javascript
 var charSet = new SecurePIN.CharSet();
 charSet.addLowerCaseAlpha().addUpperCaseAlpha().removeChar("aA").randomize();
 ```
@@ -82,7 +102,7 @@ charSet.addLowerCaseAlpha().addUpperCaseAlpha().removeChar("aA").randomize();
 Once you have your CharSet created, pass it along to the string generator and generate a string!
 
 
-```typescript
+```javascript
 var charSet = ...
 ...
 SecurePIN.generateString(15, charSet, function(str) {
@@ -92,7 +112,7 @@ SecurePIN.generateString(15, charSet, function(str) {
 
 ### Synchronous Example
 
-```typescript
+```javascript
 var charSet = ...
 ...
 var str = SecurePIN.generateStringSync(15, charSet);

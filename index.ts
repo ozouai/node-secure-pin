@@ -6,7 +6,7 @@ var MaxUInt = 4294967295;
 import * as crypto from "crypto";
 
 
-function generateRandomNumber(min: number, max: number, cb: (num: number)=>void) {
+export function generateRandomInt(min: number, max: number, cb: (num: number)=>void) {
     crypto.randomBytes(8, function(err, bytes) {
         var uint = new Buffer(bytes).readUInt32LE(0);
         var rand = map(min, max, uint);
@@ -14,7 +14,7 @@ function generateRandomNumber(min: number, max: number, cb: (num: number)=>void)
     });
 }
 
-function generateRandomNumberSync(min: number, max: number) : number {
+export function generateRandomIntSync(min: number, max: number) : number {
     var bytes = crypto.randomBytes(8);
         var uint = new Buffer(bytes).readUInt32LE(0);
         var rand = map(min, max, uint);
@@ -23,7 +23,7 @@ function generateRandomNumberSync(min: number, max: number) : number {
 
 function stackGeneratePin(length: number, min: number, max: number, cb: (pin: string) => void) {
     var pin = "";
-    generateRandomNumber(min, max, (num)=> {
+    generateRandomInt(min, max, (num)=> {
         pin+= ""+num;
         if(length > 1) {
             stackGeneratePin(length-1, min, max, function(pin2) {
@@ -45,7 +45,7 @@ export function generatePin(length: number, cb: (pin: string) => void) {
 export function generatePinSync(length: number) : string {
     var pin = "";
     for(var i=0; i<length; i++) {
-        pin+= ""+ generateRandomNumberSync(0, 9);
+        pin+= ""+ generateRandomIntSync(0, 9);
     }
     return pin;
 }
@@ -200,14 +200,14 @@ export function generateStringSync(length: number, characters: CharSet | Array<s
     }
     var pin = "";
     for(var i=0; i<length; i++) {
-        pin+= chars[generateRandomNumberSync(0, chars.length-1)];
+        pin+= chars[generateRandomIntSync(0, chars.length-1)];
     }
     return pin;
 }
 
 function stackGenerateString(length: number, characters: Array<string>, cb: (str:string) => void) {
     var pin = "";
-    generateRandomNumber(0, characters.length-1, (num)=> {
+    generateRandomInt(0, characters.length-1, (num)=> {
         pin+= ""+characters[num];
         if(length > 1) {
             stackGenerateString(length-1, characters, function(pin2) {
@@ -224,7 +224,7 @@ function stackGenerateString(length: number, characters: Array<string>, cb: (str
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
     while (0 !== currentIndex) {
-        randomIndex = generateRandomNumberSync(0, currentIndex);
+        randomIndex = generateRandomIntSync(0, currentIndex);
         currentIndex -= 1;
         temporaryValue = array[currentIndex];
         array[currentIndex] = array[randomIndex];

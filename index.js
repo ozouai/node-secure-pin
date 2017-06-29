@@ -6,22 +6,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /// <reference path="typings/index.d.ts" />
 var MaxUInt = 4294967295;
 var crypto = require("crypto");
-function generateRandomNumber(min, max, cb) {
+function generateRandomInt(min, max, cb) {
     crypto.randomBytes(8, function (err, bytes) {
         var uint = new Buffer(bytes).readUInt32LE(0);
         var rand = map(min, max, uint);
         cb(rand);
     });
 }
-function generateRandomNumberSync(min, max) {
+exports.generateRandomInt = generateRandomInt;
+function generateRandomIntSync(min, max) {
     var bytes = crypto.randomBytes(8);
     var uint = new Buffer(bytes).readUInt32LE(0);
     var rand = map(min, max, uint);
     return rand;
 }
+exports.generateRandomIntSync = generateRandomIntSync;
 function stackGeneratePin(length, min, max, cb) {
     var pin = "";
-    generateRandomNumber(min, max, function (num) {
+    generateRandomInt(min, max, function (num) {
         pin += "" + num;
         if (length > 1) {
             stackGeneratePin(length - 1, min, max, function (pin2) {
@@ -43,7 +45,7 @@ exports.generatePin = generatePin;
 function generatePinSync(length) {
     var pin = "";
     for (var i = 0; i < length; i++) {
-        pin += "" + generateRandomNumberSync(0, 9);
+        pin += "" + generateRandomIntSync(0, 9);
     }
     return pin;
 }
@@ -192,14 +194,14 @@ function generateStringSync(length, characters) {
     }
     var pin = "";
     for (var i = 0; i < length; i++) {
-        pin += chars[generateRandomNumberSync(0, chars.length - 1)];
+        pin += chars[generateRandomIntSync(0, chars.length - 1)];
     }
     return pin;
 }
 exports.generateStringSync = generateStringSync;
 function stackGenerateString(length, characters, cb) {
     var pin = "";
-    generateRandomNumber(0, characters.length - 1, function (num) {
+    generateRandomInt(0, characters.length - 1, function (num) {
         pin += "" + characters[num];
         if (length > 1) {
             stackGenerateString(length - 1, characters, function (pin2) {
@@ -215,7 +217,7 @@ function stackGenerateString(length, characters, cb) {
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
     while (0 !== currentIndex) {
-        randomIndex = generateRandomNumberSync(0, currentIndex);
+        randomIndex = generateRandomIntSync(0, currentIndex);
         currentIndex -= 1;
         temporaryValue = array[currentIndex];
         array[currentIndex] = array[randomIndex];

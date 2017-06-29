@@ -1,8 +1,8 @@
+"use strict";
 /**
  * Created by Omar on 5/3/2017.
  */
 /// <reference path="typings/index.d.ts" />
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var chai = require("chai");
 var sp = require("./index");
