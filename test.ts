@@ -179,6 +179,15 @@ describe("Number Generator", function() {
             chai.assert(i >= 0, "Less than 0");
             chai.assert(i <= 100, "Greater than 100");
         })
+    });
+    describe("Async", function() {
+        it("Should be within a range of 0-100", function(done) {
+            sp.generateRandomInt(0, 100, function(int) {
+                chai.assert(int >= 0, "Less than 0");
+                chai.assert(int <= 100, "Greater than 100");
+                done();
+            })
+        })
     })
 })
 
