@@ -4,9 +4,9 @@
   "description": "A cryptographically secure pin code generator with string support",
   "main": "index.js",
   "typings": "index.ts",
-  "homepage": "https://omarzouai.com/node/7",
+  "homepage": "https://github.com/ozouai/node-secure-pin#readme",
   "scripts": {
-    "test": "mocha test.js"
+    "test": "istanbul cover node_modules/mocha/bin/_mocha test.js && codecov"
   },
   "repository": {
     "type": "git",
@@ -29,9 +29,10 @@
   "bugs": {
     "url": "https://github.com/ozouai/node-secure-pin/issues"
   },
-  "homepage": "https://github.com/ozouai/node-secure-pin#readme",
   "devDependencies": {
     "chai": "^3.5.0",
+    "codecov": "^2.2.0",
+    "istanbul": "^0.4.5",
     "mocha": "^3.3.0"
   }
 }
