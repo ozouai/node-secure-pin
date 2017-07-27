@@ -1,6 +1,6 @@
 {
   "name": "secure-pin",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "A cryptographically secure pin code generator with string support",
   "main": "index.js",
   "typings": "index.ts",
