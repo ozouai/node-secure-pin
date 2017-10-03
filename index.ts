@@ -2,27 +2,27 @@
  * Created by Omar on 5/3/2017.
  */
 
-var MaxUInt = 4294967295;
+const MaxUInt = 4294967295;
 import * as crypto from "crypto";
 
 
 export function generateRandomInt(min: number, max: number, cb: (num: number)=>void) {
     crypto.randomBytes(8, function(err, bytes) {
-        var uint = new Buffer(bytes).readUInt32LE(0);
-        var rand = map(min, max, uint);
+        let uint = new Buffer(bytes).readUInt32LE(0);
+        let rand = map(min, max, uint);
         cb(rand);
     });
 }
 
 export function generateRandomIntSync(min: number, max: number) : number {
-    var bytes = crypto.randomBytes(8);
-        var uint = new Buffer(bytes).readUInt32LE(0);
-        var rand = map(min, max, uint);
+    let bytes = crypto.randomBytes(8);
+        let uint = new Buffer(bytes).readUInt32LE(0);
+        let rand = map(min, max, uint);
         return rand;
 }
 
 function stackGeneratePin(length: number, min: number, max: number, cb: (pin: string) => void) {
-    var pin = "";
+    let pin = "";
     generateRandomInt(min, max, (num)=> {
         pin+= ""+num;
         if(length > 1) {
@@ -43,16 +43,16 @@ export function generatePin(length: number, cb: (pin: string) => void) {
 }
 
 export function generatePinSync(length: number) : string {
-    var pin = "";
-    for(var i=0; i<length; i++) {
+    let pin = "";
+    for(let i=0; i<length; i++) {
         pin+= ""+ generateRandomIntSync(0, 9);
     }
     return pin;
 }
 
 function map(min, max, int) {
-    var range = (max + 1) - min
-    var factor = range / MaxUInt;
+    let range = (max + 1) - min
+    let factor = range / MaxUInt;
     return ((int * factor) + min) >> 0;
 }
 
@@ -89,7 +89,7 @@ export class CharSet {
      * @returns {CharSet} to chain commands
      */
     public addNumeric() {
-        for(var i=0; i<10; i++) {
+        for(let i=0; i<10; i++) {
             this.set.push(""+i);
         }
         return this;
@@ -147,7 +147,7 @@ export class CharSet {
      */
     public removeChar(char: string | string[]) {
 
-        var chars = char;
+        let chars = char;
         if(typeof chars == "string") {
             if(chars.length == 1) {
                 chars = [chars];
@@ -155,7 +155,7 @@ export class CharSet {
                 chars = chars.split("");
             }
         }
-        for(var c of chars) {
+        for(let c of chars) {
             if(this.set.indexOf(c) != -1) {
                 while (this.set.indexOf(c) != -1) {
                     this.set.splice(this.set.indexOf(c), 1);
@@ -180,7 +180,7 @@ export class CharSet {
  * @param cb The callback
  */
 export function generateString(length: number, characters: CharSet | Array<string>, cb: (str:string)=>void) {
-    var chars = characters;
+    let chars = characters;
     if(chars instanceof CharSet) {
         chars = chars.getCharSet();
     }
@@ -194,19 +194,19 @@ export function generateString(length: number, characters: CharSet | Array<strin
  * @param characters The CharSet or array of characters to use
  */
 export function generateStringSync(length: number, characters: CharSet | Array<string>) {
-    var chars = characters;
+    let chars = characters;
     if(chars instanceof CharSet) {
         chars = chars.getCharSet();
     }
-    var pin = "";
-    for(var i=0; i<length; i++) {
+    let pin = "";
+    for(let i=0; i<length; i++) {
         pin+= chars[generateRandomIntSync(0, chars.length-1)];
     }
     return pin;
 }
 
 function stackGenerateString(length: number, characters: Array<string>, cb: (str:string) => void) {
-    var pin = "";
+    let pin = "";
     generateRandomInt(0, characters.length-1, (num)=> {
         pin+= ""+characters[num];
         if(length > 1) {
@@ -222,7 +222,7 @@ function stackGenerateString(length: number, characters: Array<string>, cb: (str
 
 
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    let currentIndex = array.length, temporaryValue, randomIndex;
     while (0 !== currentIndex) {
         randomIndex = generateRandomIntSync(0, currentIndex);
         currentIndex -= 1;
