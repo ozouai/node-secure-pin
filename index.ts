@@ -1,7 +1,7 @@
 /**
  * Created by Omar on 5/3/2017.
  */
-/// <reference path="typings/index.d.ts" />
+
 var MaxUInt = 4294967295;
 import * as crypto from "crypto";
 

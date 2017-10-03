@@ -1,9 +1,8 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by Omar on 5/3/2017.
  */
-/// <reference path="typings/index.d.ts" />
+Object.defineProperty(exports, "__esModule", { value: true });
 var MaxUInt = 4294967295;
 var crypto = require("crypto");
 function generateRandomInt(min, max, cb) {
