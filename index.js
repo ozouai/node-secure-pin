@@ -1,14 +1,13 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by Omar on 5/3/2017.
  */
-/// <reference path="typings/index.d.ts" />
+Object.defineProperty(exports, "__esModule", { value: true });
 var MaxUInt = 4294967295;
 var crypto = require("crypto");
 function generateRandomInt(min, max, cb) {
     crypto.randomBytes(8, function (err, bytes) {
-        var uint = new Buffer(bytes).readUInt32LE(0);
+        var uint = Buffer.from(bytes).readUInt32LE(0);
         var rand = map(min, max, uint);
         cb(rand);
     });
@@ -16,7 +15,7 @@ function generateRandomInt(min, max, cb) {
 exports.generateRandomInt = generateRandomInt;
 function generateRandomIntSync(min, max) {
     var bytes = crypto.randomBytes(8);
-    var uint = new Buffer(bytes).readUInt32LE(0);
+    var uint = Buffer.from(bytes).readUInt32LE(0);
     var rand = map(min, max, uint);
     return rand;
 }

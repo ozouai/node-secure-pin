@@ -1,6 +1,6 @@
 {
   "name": "secure-pin",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "A cryptographically secure pin code generator with string support",
   "main": "index.js",
   "typings": "index.ts",
@@ -30,9 +30,11 @@
     "url": "https://github.com/ozouai/node-secure-pin/issues"
   },
   "devDependencies": {
+    "@types/node": "^8.0.31",
     "chai": "^3.5.0",
     "codecov": "^2.2.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.3.0"
-  }
+  },
+  "dependencies": {}
 }
