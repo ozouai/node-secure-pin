@@ -8,7 +8,7 @@ import * as crypto from "crypto";
 
 export function generateRandomInt(min: number, max: number, cb: (num: number)=>void) {
     crypto.randomBytes(8, function(err, bytes) {
-        let uint = new Buffer(bytes).readUInt32LE(0);
+        let uint = Buffer.from(bytes).readUInt32LE(0);
         let rand = map(min, max, uint);
         cb(rand);
     });
@@ -16,7 +16,7 @@ export function generateRandomInt(min: number, max: number, cb: (num: number)=>v
 
 export function generateRandomIntSync(min: number, max: number) : number {
     let bytes = crypto.randomBytes(8);
-        let uint = new Buffer(bytes).readUInt32LE(0);
+        let uint = Buffer.from(bytes).readUInt32LE(0);
         let rand = map(min, max, uint);
         return rand;
 }
