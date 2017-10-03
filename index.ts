@@ -50,7 +50,7 @@ export function generatePinSync(length: number) : string {
     return pin;
 }
 
-function map(min, max, int) {
+function map(min: number, max: number, int: number) {
     let range = (max + 1) - min
     let factor = range / MaxUInt;
     return ((int * factor) + min) >> 0;
@@ -221,7 +221,7 @@ function stackGenerateString(length: number, characters: Array<string>, cb: (str
 }
 
 
-function shuffle(array) {
+function shuffle(array: Array<string>) {
     let currentIndex = array.length, temporaryValue, randomIndex;
     while (0 !== currentIndex) {
         randomIndex = generateRandomIntSync(0, currentIndex);
