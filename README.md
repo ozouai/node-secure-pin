@@ -13,13 +13,13 @@ npm install secure-pin
 Typescript
 
 ```javascript
-import * as SecurePIN from "secure-pin";
+import * as securePin from "secure-pin";
 ```
 
 Javascript
 
 ```javascript
-var SecurePIN = require("secure-pin");
+var securePin = require("secure-pin");
 ```
 
 ## Generate PIN
@@ -27,7 +27,7 @@ var SecurePIN = require("secure-pin");
 ### Signature
 
 ```javascript
-SecurePIN.generatePin(length : number, callback: (pin: string) => void);
+securePin.generatePin(length : number, callback: (pin: string) => void);
 ```
 
 * The length can be any number > 0
@@ -35,7 +35,7 @@ SecurePIN.generatePin(length : number, callback: (pin: string) => void);
 ### Example
 
 ```javascript
-SecurePIN.generatePin(4, (pin)=> {
+securePin.generatePin(4, (pin)=> {
     console.log("Pin: " + pin);
 })
 ```
@@ -51,7 +51,7 @@ Pin: 1234
 You can also generate a pin synchronously with `generatePinSync`
 
 ```javascript
-var pin = SecurePIN.generatePinSync(4);
+var pin = securePin.generatePinSync(4);
 ```
 
 ## Generate Numbers
@@ -62,7 +62,7 @@ Methods also exist to securely generate numbers within a given range
 ### Async
 
 ```javascript
-SecurePIN.generateInt(0, 100, function(int) {
+securePin.generateInt(0, 100, function(int) {
     console.log(int);
 });
 ```
@@ -70,7 +70,7 @@ SecurePIN.generateInt(0, 100, function(int) {
 ### Synchronously
 
 ```javascript
-var int = SecurePIN.generateIntSync(0, 100);
+var int = securePin.generateIntSync(0, 100);
 console.log(int);
 ```
 
@@ -79,7 +79,7 @@ console.log(int);
 In order to generate a string, first you must create a character set. This can either be an array of characters, or the built-in CharSet class
 
 ```javascript
-var charSet = new SecurePIN.CharSet();
+var charSet = new securePin.CharSet();
 ```
 
 Then, you need to add characters to the set. The class has a couple functions to add basic characters, as well as some extra functions.
@@ -95,7 +95,7 @@ Then, you need to add characters to the set. The class has a couple functions to
 ### Example
 
 ```javascript
-var charSet = new SecurePIN.CharSet();
+var charSet = new securePin.CharSet();
 charSet.addLowerCaseAlpha().addUpperCaseAlpha().removeChar("aA").randomize();
 ```
 
@@ -105,7 +105,7 @@ Once you have your CharSet created, pass it along to the string generator and ge
 ```javascript
 var charSet = ...
 ...
-SecurePIN.generateString(15, charSet, function(str) {
+securePin.generateString(15, charSet, function(str) {
 	console.log(str);
 });
 ```
@@ -115,8 +115,18 @@ SecurePIN.generateString(15, charSet, function(str) {
 ```javascript
 var charSet = ...
 ...
-var str = SecurePIN.generateStringSync(15, charSet);
+var str = securePin.generateStringSync(15, charSet);
 console.log(str);
+```
+
+### Default CharSet
+
+A default character set is also exported, it contains both upper and lower case letters, as well as numeric characters.
+
+```javascript
+securePin.generateString(15, securePin.defaultCharset, (str)=>{
+    console.log(str);
+})
 ```
 
 ## PIN Entropy

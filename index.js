@@ -166,6 +166,12 @@ var CharSet = (function () {
 }());
 exports.CharSet = CharSet;
 /**
+ * A predefined charset that contains lower and uppercase alpha, and numeric
+ * @type {CharSet}
+ */
+exports.defaultCharset = new CharSet();
+exports.defaultCharset.addLowerCaseAlpha().addUpperCaseAlpha().addNumeric().randomize();
+/**
  * Generates a cryptographically secure string
  * @param length The desired length of the string
  * @param characters The CharSet or array of characters to use

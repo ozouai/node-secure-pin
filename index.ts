@@ -173,6 +173,14 @@ export class CharSet {
         return this.set;
     }
 }
+
+/**
+ * A predefined charset that contains lower and uppercase alpha, and numeric
+ * @type {CharSet}
+ */
+export const defaultCharset = new CharSet();
+defaultCharset.addLowerCaseAlpha().addUpperCaseAlpha().addNumeric().randomize();
+
 /**
  * Generates a cryptographically secure string
  * @param length The desired length of the string
