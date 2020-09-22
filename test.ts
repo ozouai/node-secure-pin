@@ -193,6 +193,15 @@ describe("Number Generator", function() {
 
 describe("String Charset", function() {
     describe("Test Randomization", function() {
+        it("Should do nothing when array is empty", function() {
+          var c = new sp.CharSet().randomize().getCharSet();
+          chai.assert(c.length == 0, "Should be empty");
+        });
+        it("Should do nothing when array has one element", function() {
+          var c = new sp.CharSet().addCharacter("a").randomize().getCharSet();
+          chai.assert(c.length == 1, "Should have length 1");
+          chai.expect(c).to.contain("a", "Should contain added char");
+        });
         var cs = new sp.CharSet();
         cs.addNumeric().addLowerCaseAlpha().addUpperCaseAlpha();
         var c = [].concat(cs.getCharSet().slice(0));

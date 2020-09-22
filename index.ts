@@ -232,7 +232,7 @@ function stackGenerateString(length: number, characters: Array<string>, cb: (str
 function shuffle(array: Array<string>) {
     let currentIndex = array.length, temporaryValue, randomIndex;
     while (0 !== currentIndex) {
-        randomIndex = generateRandomIntSync(0, currentIndex);
+        randomIndex = generateRandomIntSync(0, currentIndex-1);
         currentIndex -= 1;
         temporaryValue = array[currentIndex];
         array[currentIndex] = array[randomIndex];
