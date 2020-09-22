@@ -222,7 +222,7 @@ function stackGenerateString(length, characters, cb) {
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
     while (0 !== currentIndex) {
-        randomIndex = generateRandomIntSync(0, currentIndex);
+        randomIndex = generateRandomIntSync(0, currentIndex - 1);
         currentIndex -= 1;
         temporaryValue = array[currentIndex];
         array[currentIndex] = array[randomIndex];
